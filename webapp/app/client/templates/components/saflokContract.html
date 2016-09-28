@@ -1,0 +1,96 @@
+<template name="components_saflokContract">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+            {{i18n 'dapp.components.saflokContract.header'}}
+        </div>
+        <div class="panel-body">
+            {{#with TemplateVar.get 'state'}}
+                {{#if isError}}
+                    <div class="alert alert-warning">
+                        There was an error deploying your contract.
+                        The error was: "{{error}}".
+                    </div>
+                {{/if}}
+            
+                {{#if isMining}}
+                    <div class="alert alert-info">
+                        Your contract is being mined...
+                        <span class="badge text-right">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </span>
+                    </div>
+                {{/if}}
+            
+                {{#if isMined}}
+                    <div class="alert alert-success">
+                        Your Saflok Contract has been mined and key card ready to be programmed.
+                    </div>
+            
+                    <hr />
+            
+                    <label>
+                        Your contract has been deployed to this address:
+                    </label>
+            
+                    <input type="text" class="form-control" 
+                           value="{{address}}" placeholder="Address" />
+            
+                    <br />
+                                        
+                    
+                    <!--
+                    {{txtCheckoutDate}}
+                    {{txtCheckoutTime}}
+                    {{txtRoom}}
+            
+                    <pre class="well well-info">{{source}}</pre>
+                    
+                    <hr />
+            
+                    <label>
+                        Type a value here to multply:
+                    </label>
+            
+                    <input type="text"
+                            id="multiplyValue"
+                            class="form-control" 
+                            placeholder="{{i18n 'dapp.components.saflokContract.placeholder'}}" />
+            
+                    <br />
+                    
+                    <p>
+                        Multiply Result: 
+                        <span>{{TemplateVar.get 'multiplyResult'}}</span>
+                    </p>
+                    //-->
+                {{/if}}
+            
+                {{#if isInactive}}
+                    <p class="well well-info">
+                        {{i18n 'dapp.components.saflokContract.description'}}
+                    </p>
+                    <ul>  
+
+    <form>
+        
+    Checkout date: 
+    <input type="text" name="checkoutDate" placeholder="MM-DD-YYYY"><br>
+    Checkout time:
+    <input type="text" name="checkoutTime" placeholder="HH:MM"><br><br>
+    Room:
+    <input type="text" name="room" placeholder="####"><br><br>
+    <input type="submit" class="btn btn-default btn-deploy" value="Create Saflok Key">               
+                    
+                   
+    
+  </form>
+  </ul>
+
+
+            
+                    
+                {{/if}}
+            {{/with}}
+        </div>
+    </div>
+</template>

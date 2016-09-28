@@ -1,0 +1,90 @@
+{
+	"dapp": {
+		"app": {
+			"title": "Interspace Blockchain Access"
+			, "buttons": {
+				"view1": "Blockchain"
+				, "view2": "Access"
+				, "view3": "Saflok"
+				, "view4": "Welcome"
+				, "view5": "Identity"
+			}
+			, "headers": {
+				"identicon": "Identicon"
+				, "address": "Address"
+				, "balance": "Balance"
+				, "account": "Account"
+				, "solidity": "Solidity Code"
+				, "coinbase": "Coinbase"
+				, "listening": "Listening"
+				, "peerCount": "Peer Count"
+				, "blockNumber": "Block Numbr"
+				, "defaultBlock": "Default Block"
+				, "mining": "Mining"
+				, "gasPrice": "Gas Price"
+			}
+			, "copyright": "Developed by Blocksense.io"
+		}
+		, "components": {
+			"balance": {
+				"header": "My Access tokens"
+				, "original": "This round"
+			}
+			, "accounts": {
+				"header": "My Accounts"
+				, "description": "These are your regstered addresses. that have access to the ecosystem The identicons are generated based on the address value. Note, balance is static."			
+			}
+			, "multiplyContract": {
+				"header": "Credentials Contract"
+				, "description": "Generate credentials. These could be signed by a payment processor, service provider, an api or other"
+				, "create": "Create New Contract"
+				, "deployed": "The contract was deployed to this address"
+				, "placeholder": "Access Key"
+			}
+			, "saflokContract": {
+				"header": "Saflok Contract"
+				, "description": "Book access. This will create a Saflok key and NFC card"
+				, "create": "Create Saflok key"
+				, "deployed": "The contract was deployed to this address"
+				, "placeholder": "Saflok Key"
+			}
+			, "identityContract": {
+				"header": "Identity Contract"
+				, "description": "Create an identity that will be registered on the blockchain."
+				, "create": "Create Identity"
+				, "deployed": "The contract was deployed to this address"
+				, "placeholder": "Identity"
+			}
+			, "welcome": {
+				"header": "Welcome"
+				, "description": "Interspace access management"
+				, "create": "Start"
+				, "deployed": "Here we go"
+				, "placeholder": "Going"
+			}
+			, "networkHealth": {
+				"header": "Network Health"			
+			}
+		}
+		, "view1": {
+			"title": "Credentials"
+			, "defaultName": "Blockchain"
+		}
+		, "view2": {
+			"title": "Access"
+			, "defaultName": "Access"
+		}
+		, "view3": {
+			"title": "Saflok"
+			, "defaultName": "Saflok"
+		}
+		, "view4": {
+			"title": "Welcome"
+			, "defaultName": "Welcome"
+		}
+		, "view5": {
+			"title": "Identity"
+			, "defaultName": "Identity"
+		}
+	}
+}
