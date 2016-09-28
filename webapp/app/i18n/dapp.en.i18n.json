@@ -10,9 +10,9 @@
 				, "view5": "Identity"
 			}
 			, "headers": {
-				"identicon": "Identicon"
-				, "address": "Address"
-				, "balance": "Balance"
+				"identicon": "Identity"
+				, "address": "Credentials"
+				, "balance": "Saflok Access"
 				, "account": "Account"
 				, "solidity": "Solidity Code"
 				, "coinbase": "Coinbase"
@@ -31,13 +31,13 @@
 				, "original": "This round"
 			}
 			, "accounts": {
-				"header": "My Accounts"
-				, "description": "These are your regstered addresses. that have access to the ecosystem The identicons are generated based on the address value. Note, balance is static."			
+				"header": "Regsitered Users"
+				, "description": "The accounts and credetials linked by smart contracts."			
 			}
-			, "multiplyContract": {
+			, "credentialsContract": {
 				"header": "Credentials Contract"
-				, "description": "Generate credentials. These could be signed by a payment processor, service provider, an api or other"
-				, "create": "Create New Contract"
+				, "description": "Grant credentials to the identity you created. The will be linked with a smart contract on the blockchain."
+				, "create": "Attach credentials"
 				, "deployed": "The contract was deployed to this address"
 				, "placeholder": "Access Key"
 			}

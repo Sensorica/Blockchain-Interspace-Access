@@ -1,30 +1,30 @@
 
 // disconnect any meteor server
-if(location.host !== 'localhost:3000' 
+/*if(location.host !== 'localhost:3000' 
    && location.host !== '127.0.0.1:3000' 
    && typeof MochaWeb === 'undefined')
-    Meteor.disconnect();
+    Meteor.disconnect();*/
 
 
 // Set the default unit to ether
-if(!LocalStore.get('etherUnit'))
+/*if(!LocalStore.get('etherUnit'))
     LocalStore.set('etherUnit', 'ether');
 
 
 // Set Session default values for components
 if (Meteor.isClient) {
 	Session.setDefault('balance', '0');
-}
-
+*/
 Meteor.startup(function() {
     // set providor, which should be a geth node
     // my RPC settings are: 
     // geth --rpc --rpcaddr="0.0.0.0" --rpccorsdomain="*" --mine --unlock=YOUR_ACCOUNT --verbosity=5 --maxpeers=0 --minerthreads="3"
-    if(!web3.currentProvider)
-        web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
-    
+    //
+    //if(!web3.currentProvider)
+     //   web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
+    //
     // Setup EthAccounts
-    EthAccounts.init();
+    //EthAccounts.init();
         
     // SET default language
     if(Cookie.get('TAPi18next')) {
