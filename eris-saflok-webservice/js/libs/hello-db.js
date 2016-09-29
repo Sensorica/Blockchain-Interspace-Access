@@ -63,7 +63,7 @@ var chain = require('./hello-chain');
     }
 
     function getSaflokKeys(expiryDate, expiryTime) {
-        log.debug('Retrieving deals from DB using parameters buyer: '+buyer+', seller: '+seller);
+        log.debug('Retrieving deals from DB using parameters expiry date: '+expiryDate+', expiry time: '+expiryTime);
         var queryParams = createQuery(expiryDate, expiryTime);
         // Use AND for multiple query params
         if (queryParams.length > 1) {
@@ -88,10 +88,10 @@ var chain = require('./hello-chain');
      */
     function createQuery(expiryDate, expiryTime) {
         var queryParams = [];
-        if (buyer) {
+        if (expiryDate) {
             queryParams.push({'expiryDate': expiryDate});
         }
-        if (seller) {
+        if (expiryTime) {
             queryParams.push({'expiryTime': expiryTime});
         }
         return queryParams;
