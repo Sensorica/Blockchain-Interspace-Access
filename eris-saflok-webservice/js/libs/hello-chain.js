@@ -95,8 +95,8 @@ var eris = require(__libs+'/eris-wrapper');
         }
         collectSaflokAddresses();
 
-        function createSaflokObjects(addresses) {
-            var deals = [];
+        function createSaflokKeyObjects(addresses) {
+            var saflokKeys = [];
             async.each(addresses, function iterator(addr, callback) {
                 log.debug('Retrieving saflok data for address: ' + addr);
                 saflokContract.at(addr, function(error, contract) {
@@ -110,7 +110,7 @@ var eris = require(__libs+'/eris-wrapper');
                                 callback(err);
                             }
                             else {
-                                saflok.push(key);
+                                saflokKeys.push(saflokKey);
                                 callback();
                             }
                         });
@@ -121,7 +121,7 @@ var eris = require(__libs+'/eris-wrapper');
                     log.error('Reading of saflok data aborted due to unexpected error: '+err);
                 }
                 else {
-                    callback(err, deals);
+                    callback(err, saflokKeys);
                 }
             });
         }
@@ -145,7 +145,7 @@ var eris = require(__libs+'/eris-wrapper');
      * @param callback
      */
     function createSaflokKeyFromContract(contract, callback) {
-        var saflok = {};
+        var saflokKey = {};
         async.parallel({
             id: function(callback){
                     contract.id( eris.convertibleCallback(callback, eris.hex2str) );
@@ -163,10 +163,10 @@ var eris = require(__libs+'/eris-wrapper');
             }
         },
         function(err, results) {
-            if(err) { callback(err, saflok) }
-            saflok = results;
-            saflok.contractAddress = contract.address;
-            callback(null, saflok);
+            if(err) { callback(err, saflokKey) }
+            saflokKey = results;
+            saflokKey.contractAddress = contract.address;
+            callback(null, saflokKey);
         });
     }
 

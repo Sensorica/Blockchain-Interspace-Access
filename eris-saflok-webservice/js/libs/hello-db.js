@@ -31,8 +31,8 @@ var chain = require('./hello-chain');
             log.debug('Performing DB insert for new saflok key with address '+deal.contractAddress)
             _collection.insert(deal);
             // emit two events! One carries the ID of the deal, so it can be specifically detected
-            dbEventEmitter.emit(events.NEW_KEY, saflok);
-            dbEventEmitter.emit(events.NEW_KEY+'_'+saflok.id, saflok);
+            dbEventEmitter.emit(events.NEW_KEY, saflokKey);
+            dbEventEmitter.emit(events.NEW_KEY+'_'+saflokKey.id, saflokKey);
         });
     })
 
@@ -41,8 +41,8 @@ var chain = require('./hello-chain');
      * @param callback
      */
     function loadSaflokKeys(callback) {
-        chain.getSaflokKeys( function(error, deals) {
-            log.info('Storing '+saflok.length+' saflok keys from chain in DB.');
+        chain.getSaflokKeys( function(error, saflokKeys) {
+            log.info('Storing '+saflokKeys.length+' saflok keys from chain in DB.');
             _collection.removeDataOnly();
             _collection.insert(saflokKeys);
             callback(null);
@@ -78,9 +78,9 @@ var chain = require('./hello-chain');
         }
     }
 
-    function createSaflokKey(saflok, callback) {
+    function createSaflokKey(saflokKey, callback) {
         // TODO check if deal exists in DB
-        chain.createSaflokKey(saflok, callback);
+        chain.createSaflokKey(saflokKey, callback);
     }
 
     /*
