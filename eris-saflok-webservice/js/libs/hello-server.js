@@ -36,12 +36,12 @@ var db = require(__libs+'/hello-db');
         res.json( db.getDeal(req.params.id) );
     });
 
-    // POST new deal
-    app.post('/deals', function(req, res) {
-        var deal = req.body;
-        chain.addDeal(deal, function(error) {
+    // POST new saflok key
+    app.post('/saflok', function(req, res) {
+        var key = req.body;
+        chain.createSaflokKey(key, function(error) {
             // needs timeout!
-            db.listen.once( db.events.NEW_DEAL+'_'+deal.id, function(deal) {
+            db.listen.once( db.events.NEW_SAFLOK+'_'+key.id, function(key) {
                 res.sendStatus(200);
             });
         });

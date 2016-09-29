@@ -1,8 +1,8 @@
 jobs:
 
-- name: AccessManager
+- name: SaflokManager
   job:
     deploy:
-      contract: DealManager.sol
+      contract: SaflokManager.sol
       instance: all
       wait: true
