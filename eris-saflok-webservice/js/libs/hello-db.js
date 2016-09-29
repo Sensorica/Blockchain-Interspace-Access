@@ -10,7 +10,7 @@ var chain = require('./hello-chain');
     var log = logger.getLogger('eris.hello.db');
 
     // Set up event emitter
-    var events = {NEW_DEAL: 'newDeal'};
+    var events = {NEW_KEY: 'createSaflokKey'};
     function DbEventEmitter() {
         EventEmitter.call(this);
     }
@@ -19,20 +19,20 @@ var chain = require('./hello-chain');
 
     // Set up Loki DB
     _db = new loki();
-    _collection = _db.addCollection('deals', {indices: ['id', 'buyer', 'seller', 'amount']});
+    _collection = _db.addCollection('saflokKeys', {indices: ['id', 'expiryDate', 'expiryTime', 'room']});
     _collection.ensureUniqueIndex('contractAddress');
 
     // Register for events from chain module
-    chain.listen.on(chain.events.NEW_DEAL, function (address, id, buyer, seller, amount) {
-        log.info('New deal detected ('+id+':'+buyer+':'+seller+':'+amount+') with address: '+address);
+    chain.listen.on(chain.events.NEW_KEY, function (address, id, expiryDate, expiryTime, room) {
+        log.info('New saflok key detected ('+id+':'+expiryDate+':'+expiryTime+':'+room+') with address: '+address);
         // Loading deal freshly from chain as there might be more data than conveyed in the event
-        chain.getDealAtAddress(address, function(err, deal) {
+        chain.getSaflokKeyAtAddress(address, function(err, deal) {
             if(err) { throw err; }
-            log.debug('Performing DB insert for new deal with address '+deal.contractAddress)
+            log.debug('Performing DB insert for new saflok key with address '+deal.contractAddress)
             _collection.insert(deal);
             // emit two events! One carries the ID of the deal, so it can be specifically detected
-            dbEventEmitter.emit(events.NEW_DEAL, deal);
-            dbEventEmitter.emit(events.NEW_DEAL+'_'+deal.id, deal);
+            dbEventEmitter.emit(events.NEW_KEY, saflok);
+            dbEventEmitter.emit(events.NEW_KEY+'_'+saflok.id, saflok);
         });
     })
 
@@ -40,11 +40,11 @@ var chain = require('./hello-chain');
      * @param library
      * @param callback
      */
-    function loadDeals(callback) {
-        chain.getDeals( function(error, deals) {
-            log.info('Storing '+deals.length+' deals from chain in DB.');
+    function loadSaflokKeys(callback) {
+        chain.getSaflokKeys( function(error, deals) {
+            log.info('Storing '+saflok.length+' saflok keys from chain in DB.');
             _collection.removeDataOnly();
-            _collection.insert(deals);
+            _collection.insert(saflokKeys);
             callback(null);
         });
     }
@@ -54,17 +54,17 @@ var chain = require('./hello-chain');
      * @param callback
      */
     function refresh(callback) {
-        loadDeals(callback);
+        loadSaflokKeys(callback);
     }
 
-    function getDeal(id) {
+    function getSaflokKey(id) {
         log.debug('Retrieving deal from DB for ID: ' + id);
         return _collection.findOne({'id': id});
     }
 
-    function getDeals(buyer, seller) {
+    function getSaflokKeys(expiryDate, expiryTime) {
         log.debug('Retrieving deals from DB using parameters buyer: '+buyer+', seller: '+seller);
-        var queryParams = createQuery(buyer, seller);
+        var queryParams = createQuery(expiryDate, expiryTime);
         // Use AND for multiple query params
         if (queryParams.length > 1) {
             return _collection.find({'$and': queryParams});
@@ -78,21 +78,21 @@ var chain = require('./hello-chain');
         }
     }
 
-    function addDeal(deal, callback) {
+    function createSaflokKey(saflok, callback) {
         // TODO check if deal exists in DB
-        chain.addDeal(deal, callback);
+        chain.createSaflokKey(saflok, callback);
     }
 
     /*
         Helper method to create a query object for LokiJS' search
      */
-    function createQuery(buyer, seller) {
+    function createQuery(expiryDate, expiryTime) {
         var queryParams = [];
         if (buyer) {
-            queryParams.push({'buyer': buyer});
+            queryParams.push({'expiryDate': expiryDate});
         }
         if (seller) {
-            queryParams.push({'seller': seller});
+            queryParams.push({'expiryTime': expiryTime});
         }
         return queryParams;
     }
@@ -101,9 +101,9 @@ var chain = require('./hello-chain');
         'events': events,
         'listen': dbEventEmitter,
         'refresh': refresh,
-        'getDeal': getDeal,
-        'getDeals': getDeals,
-        'addDeal': addDeal
+        'getSaflokKey': getSaflokKey,
+        'getSaflokKeys': getSaflokKeys,
+        'createSaflokKey': createSaflokKey
     };
 
 }());

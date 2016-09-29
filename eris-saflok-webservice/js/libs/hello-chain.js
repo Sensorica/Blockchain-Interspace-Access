@@ -24,17 +24,17 @@ var eris = require(__libs+'/eris-wrapper');
     // The following part depends on local files that are generated during contract deployment via EPM
     // ##############
     var epmData = require(__contracts+'/epm.json');
-    var messageFactoryAbi = JSON.parse(fs.readFileSync(__contracts+'/abi/saflokManager'));
+    var messageFactoryAbi = JSON.parse(fs.readFileSync(__contracts+'/abi/SaflokManager'));
     var messageAbi = JSON.parse(fs.readFileSync(__contracts+'/abi/Saflok'));
 
     // Instantiate connection
     var erisWrapper = new eris.NewWrapper( (__settings.eris.chain.host || 'localhost'), (__settings.eris.chain.port || '1337') );
     // Create contract objects
-    var dealManager = erisWrapper.createContract(messageFactoryAbi, epmData['saflokManager']);
-    var dealContract = erisWrapper.createContract(messageAbi, epmData['createKey']);
+    var saflokManager = erisWrapper.createContract(messageFactoryAbi, epmData['SaflokManager']);
+    var saflokContract = erisWrapper.createContract(messageAbi, epmData['Saflok']);
 
     // Event Registration
-    saflokManager.CreateKey(
+    saflokManager.NewSaflokKey(
         function (error, eventSub) {
             if(error) { throw error; }
             //eventSubNew = eventSub; // ignoring this for now
@@ -42,7 +42,7 @@ var eris = require(__libs+'/eris-wrapper');
         function (error, event) {
             if(event) {
                 chainEvents.emit(events.NEW_KEY, event.args.contractAddress, eris.hex2str(event.args.id),
-                    eris.hex2str(event.args.buyer), eris.hex2str(event.args.seller), event.args.amount);
+                    eris.hex2str(event.args.expiryDate), eris.hex2str(event.args.expiryTime), eris.hex2str(event.args.room));
             }
         });
 
@@ -60,10 +60,10 @@ var eris = require(__libs+'/eris-wrapper');
      * @param deal
      * @param callback
      */
-    var addKey = function(deal, callback) {
-        dealManager.addDeal(eris.str2hex(deal.id), eris.str2hex(deal.buyer),
-                        eris.str2hex(deal.seller), deal.amount, function(error, result) {
-            log.debug('Created new deal id: '+deal.id+'buyer:'+deal.buyer+', seller: '+deal.seller+', amount: '+deal.amount);
+    var createSaflokKey = function(saflok, callback) {
+        saflokManager.createSaflokKey(eris.str2hex(saflok.id), eris.str2hex(saflok.expiryDate),
+                        eris.str2hex(saflok.expiryTime), eris.str2hex(saflok.room), function(error, result) {
+            log.debug('Created new saflok id: '+saflok.id+'expiry date:'+saflok.expiryDate+', expiry time: '+saflok.expiryTime+', room: '+saflok.room);
             callback(error);
         });
     };
@@ -73,11 +73,11 @@ var eris = require(__libs+'/eris-wrapper');
      * This function is very expensive and might not perform well for large numbers of deals
      * @param callback
      */
-    var getKeys = function(callback) {
+    var getSaflokKeys = function(callback) {
 
         var idx = 0;
         var addresses = [];
-        function collectDealAddresses () {
+        function collectSaflokAddresses () {
             saflokManager.valueAtIndexHasNext(idx, function(error, result) {
                 if (error) { throw error; }
                 if(result[0] != 0) {
@@ -132,10 +132,10 @@ var eris = require(__libs+'/eris-wrapper');
      * @param address
      * @param callback
      */
-    var getDealAtAddress = function(address, callback) {
-        dealContract.at(address, function(error, contract) {
+    var getSaflokAtAddress = function(address, callback) {
+        saflokContract.at(address, function(error, contract) {
             if (error) { throw error; }
-            createDealFromContract(contract, callback);
+            createSaflokKeyFromContract(contract, callback);
         });
     }
 
@@ -145,7 +145,7 @@ var eris = require(__libs+'/eris-wrapper');
      * @param callback
      */
     function createSaflokKeyFromContract(contract, callback) {
-        var deal = {};
+        var saflok = {};
         async.parallel({
             id: function(callback){
                     contract.id( eris.convertibleCallback(callback, eris.hex2str) );
@@ -166,7 +166,7 @@ var eris = require(__libs+'/eris-wrapper');
             if(err) { callback(err, saflok) }
             saflok = results;
             saflok.contractAddress = contract.address;
-            callback(null, deal);
+            callback(null, saflok);
         });
     }
 
@@ -174,9 +174,9 @@ var eris = require(__libs+'/eris-wrapper');
         'init': init,
         'events': events,
         'listen': chainEvents,
-        'addDeal': addDeal,
-        'getDeals': getDeals,
-        'getDealAtAddress': getDealAtAddress
+        'createSaflokKey': createSaflokKey,
+        'getSaflokKeys': getSaflokKeys,
+        'getSaflokAtAddress': getSaflokAtAddress
     }
 
 }());

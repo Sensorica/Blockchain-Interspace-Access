@@ -27,13 +27,13 @@ var db = require(__libs+'/hello-db');
      */
 
     // GET muliple
-    app.get('/deals', function(req, res) {
-        res.json( db.getDeals(req.query.buyer, req.query.seller) );
+    app.get('/saflokKey', function(req, res) {
+        res.json( db.getSaflokKeys(req.query.expiryDate, req.query.expiryTime) );
     });
 
     // GET single
-    app.get('/deal/:id', function(req, res) {
-        res.json( db.getDeal(req.params.id) );
+    app.get('/saflokKey/:id', function(req, res) {
+        res.json( db.getSaflokKey(req.params.id) );
     });
 
     // POST new saflok key
