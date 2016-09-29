@@ -7,6 +7,13 @@ var async = require('async');
 var logger = require(__libs+'/eris-logger');
 var eris = require(__libs+'/eris-wrapper');
 
+require('./message');
+var net = require('net');
+var HOST = '127.0.0.1';
+var PORT = 6969;
+
+var saflokMessage = message;
+
 (function() {
 
     var log = logger.getLogger('eris.hello.chain');
@@ -60,10 +67,10 @@ var eris = require(__libs+'/eris-wrapper');
      * @param deal
      * @param callback
      */
-    var createSaflokKey = function(saflok, callback) {
-        saflokManager.createSaflokKey(eris.str2hex(saflok.id), eris.str2hex(saflok.expiryDate),
-                        eris.str2hex(saflok.expiryTime), eris.str2hex(saflok.room), function(error, result) {
-            log.debug('Created new saflok id: '+saflok.id+'expiry date:'+saflok.expiryDate+', expiry time: '+saflok.expiryTime+', room: '+saflok.room);
+    var createSaflokKey = function(saflokKey, callback) {
+        saflokManager.createSaflokKey(eris.str2hex(saflokKey.id), eris.str2hex(saflokKey.expiryDate),
+                        eris.str2hex(saflokKey.expiryTime), eris.str2hex(saflokKey.room), function(error, result) {
+            log.debug('Created new saflok id: '+saflokKey.id+', expiry date:'+saflokKey.expiryDate+', expiry time: '+saflokKey.expiryTime+', room: '+saflokKey.room);
             callback(error);
         });
     };
@@ -105,7 +112,7 @@ var eris = require(__libs+'/eris-wrapper');
                         log.error('Failure to access contract at address '+addr+': '+error);
                     }
                     else {
-                        createSaflokKeyFromContract(contract, function (err, deal) {
+                        createSaflokKeyFromContract(contract, function (err, saflokKey) {
                             if (err) {
                                 callback(err);
                             }
@@ -132,7 +139,7 @@ var eris = require(__libs+'/eris-wrapper');
      * @param address
      * @param callback
      */
-    var getSaflokAtAddress = function(address, callback) {
+    var getSaflokKeyAtAddress = function(address, callback) {
         saflokContract.at(address, function(error, contract) {
             if (error) { throw error; }
             createSaflokKeyFromContract(contract, callback);
@@ -157,9 +164,10 @@ var eris = require(__libs+'/eris-wrapper');
                 contract.expiryTime( eris.convertibleCallback(callback, eris.hex2str) );
             },
             room: function(callback){
-                contract.room( function(err, res) {
-                    callback(err, res['c'][0]); // no fucking idea why it comes back in this structure!
-                });
+                //contract.room( function(err, res) {
+                contract.room( eris.convertibleCallback(callback, eris.hex2str) );
+                    //callback(err, res['c'][0]); // no fucking idea why it comes back in this structure!
+                
             }
         },
         function(err, results) {
@@ -176,7 +184,7 @@ var eris = require(__libs+'/eris-wrapper');
         'listen': chainEvents,
         'createSaflokKey': createSaflokKey,
         'getSaflokKeys': getSaflokKeys,
-        'getSaflokAtAddress': getSaflokAtAddress
+        'getSaflokKeyAtAddress': getSaflokKeyAtAddress
     }
 
 }());

@@ -26,10 +26,10 @@ var chain = require('./hello-chain');
     chain.listen.on(chain.events.NEW_KEY, function (address, id, expiryDate, expiryTime, room) {
         log.info('New saflok key detected ('+id+':'+expiryDate+':'+expiryTime+':'+room+') with address: '+address);
         // Loading deal freshly from chain as there might be more data than conveyed in the event
-        chain.getSaflokKeyAtAddress(address, function(err, deal) {
+        chain.getSaflokKeyAtAddress(address, function(err, saflokKey) {
             if(err) { throw err; }
-            log.debug('Performing DB insert for new saflok key with address '+deal.contractAddress)
-            _collection.insert(deal);
+            log.debug('Performing DB insert for new saflok key with address '+saflokKey.contractAddress)
+            _collection.insert(saflokKey);
             // emit two events! One carries the ID of the deal, so it can be specifically detected
             dbEventEmitter.emit(events.NEW_KEY, saflokKey);
             dbEventEmitter.emit(events.NEW_KEY+'_'+saflokKey.id, saflokKey);

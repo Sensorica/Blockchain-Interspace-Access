@@ -38,8 +38,8 @@ var db = require(__libs+'/hello-db');
 
     // POST new saflok key
     app.post('/saflok', function(req, res) {
-        var Saflokkey = req.body;
-        chain.createSaflokKey(Saflokkey, function(error) {
+        var saflokKey = req.body;
+        chain.createSaflokKey(saflokKey, function(error) {
             // needs timeout!
             db.listen.once( db.events.NEW_SAFLOK+'_'+saflokKey.id, function(saflokKey) {
                 res.sendStatus(200);

@@ -7,7 +7,7 @@ Meteor.startup(function () {
              console.log('Date: '+ checkoutDate + ' Time: ' + checkoutTime + ' Room: ' + room);
 		     HTTP.call('POST',
                    'http://localhost:3080/saflok' , {
-                        data: {"expiryDate": checkoutDate, "expiryTime": checkoutTime, "room": room},
+                        data: {"id": "1", "expiryDate": checkoutDate, "expiryTime": checkoutTime, "room": room},
                         headers: { 'Content-Type': 'application/json'}
                         },
                     function(error, result) {

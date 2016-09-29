@@ -29,6 +29,6 @@ chain.init( function(error) {
         if(error) {
            log.error('Unexpected error initializing persistence layer: '+error.message);
         }
-        log.info('Hello Eris Application started successfully ...');
+        log.info('Blockchain Saflok Application started successfully ...');
    })
 });
