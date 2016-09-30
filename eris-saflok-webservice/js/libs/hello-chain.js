@@ -7,12 +7,7 @@ var async = require('async');
 var logger = require(__libs+'/eris-logger');
 var eris = require(__libs+'/eris-wrapper');
 
-require('./message');
-var net = require('net');
-var HOST = '127.0.0.1';
-var PORT = 6969;
 
-var saflokMessage = message;
 
 (function() {
 

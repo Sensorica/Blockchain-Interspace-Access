@@ -2,12 +2,14 @@
 
 Meteor.startup(function () {
 	  Meteor.methods({
-	    postSaflok: function (checkoutDate, checkoutTime, room) {
+	    postSaflok: function (expiryDate, expiryTime, room) {
 		     console.log('Called saflok contract');
-             console.log('Date: '+ checkoutDate + ' Time: ' + checkoutTime + ' Room: ' + room);
-		     HTTP.call('POST',
+             console.log('Date: '+ expiryDate + ' Time: ' + expiryTime + ' Room: ' + room);
+		     expiryDate = expiryDate.replace(/-/g, ''); 
+             expiryTime= expiryTime.replace(/:/g, ''); 
+             HTTP.call('POST',
                    'http://localhost:3080/saflok' , {
-                        data: {"id": "1", "expiryDate": checkoutDate, "expiryTime": checkoutTime, "room": room},
+                        data: {"id": "1", "expiryDate": expiryDate, "expiryTime": expiryTime, "room": room},
                         headers: { 'Content-Type': 'application/json'}
                         },
                     function(error, result) {

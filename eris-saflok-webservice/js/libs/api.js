@@ -1,9 +1,13 @@
 
 require('./message');
-var net = require('net');
-var HOST = '127.0.0.1';
-var PORT = 6969;
 
+var net = require('net');
+var HOST = '192.168.8.69';
+var PORT = 8264;
+
+
+
+var sendSaflokKey = function (callback) {
 var saflokMessage = message;
 
 saflokMessage.calculateLrc();
@@ -37,6 +41,13 @@ client.on('data', function(data) {
 client.on('close', function() {
     console.log('Connection closed');
 });
+//callback(error);
+
+};
+
+module.exports = {
+        'sendSaflokKey': sendSaflokKey        
+    };
 
 
 

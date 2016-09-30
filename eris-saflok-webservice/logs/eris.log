@@ -1,3 +1,3 @@
-[2016-09-29 16:15:15.481] [INFO] eris.hello.db - Storing 1 saflok keys from chain in DB.
-[2016-09-29 16:15:18.439] [DEBUG] eris.hello.db - Retrieving deals from DB using parameters expiry date: undefined, expiry time: undefined
-[2016-09-29 16:15:45.749] [DEBUG] eris.hello.db - Retrieving deals from DB using parameters expiry date: undefined, expiry time: undefined
+[2016-09-30 11:17:42.680] [INFO] eris.hello.db - Calling Saflok Interface
+[2016-09-30 11:17:42.681] [INFO] eris.hello.db - Sent command to Saflok interface
+[2016-09-30 11:17:42.700] [DEBUG] eris.hello.db - Performing DB insert for new saflok key with address 8A12BB6362694E9EA6335E3E5E12A35C963EACB7
