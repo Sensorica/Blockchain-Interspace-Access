@@ -5,6 +5,7 @@ var util = require('util');
 var logger = require('./eris-logger');
 var chain = require('./hello-chain');
 var saflokRequest = require('./api');
+var eris = require(__libs+'/eris-wrapper');
 
 
 (function() {
@@ -28,7 +29,7 @@ var saflokRequest = require('./api');
     chain.listen.on(chain.events.NEW_KEY, function (address, id, expiryDate, expiryTime, room) {
         log.info('New saflok key detected ('+id+':'+expiryDate+':'+expiryTime+':'+room+') with address: '+address);
         log.info('Calling Saflok Interface');
-        saflokRequest.sendSaflokKey (log.info('Sent command to Saflok interface'));
+        saflokRequest.sendSaflokKey (log.info('Sent command to Saflok interface'), eris.str2hex(expiryDate), eris.str2hex(expiryTime), eris.str2hex(room));
         // Loading deal freshly from chain as there might be more data than conveyed in the event
         chain.getSaflokKeyAtAddress(address, function(err, saflokKey) {
             if(err) { throw err; }

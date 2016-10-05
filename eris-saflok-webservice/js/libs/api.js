@@ -7,11 +7,11 @@ var PORT = 8264;
 
 
 
-var sendSaflokKey = function (callback) {
+var sendSaflokKey = function (callback, expiryDate, expiryTime, room) {
 var saflokMessage = message;
 
 saflokMessage.calculateLrc();
-saflokMessage.setExpiration("303932303136","32303030");
+saflokMessage.setExpiration(expiryDate,expiryTime);
 
 
 var messageBuffer = new Buffer(saflokMessage.buildRequestMsg(), 'hex');
