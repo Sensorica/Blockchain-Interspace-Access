@@ -4,7 +4,7 @@ var app = require("../app.js");
 var chain = require("../js/libs/hello-chain");
 var db = require("../js/libs/hello-db");
 
-describe("Hello Eris Test", function() {
+describe("Saflok Key Request Test", function() {
 
     this.timeout(5000); // 5 sec timeout to account for block commit delay
 
@@ -18,27 +18,27 @@ describe("Hello Eris Test", function() {
         });
     });
 
-    describe("Deals", function() {
+    describe("Creat Saflok Key", function() {
 
-        var deal1 = {id: 'i1', buyer: 'John', seller: 'Hank', amount: 7364};
+        var key1 = {id: '001', expiryDate: '010120', expiryTime: '13:00', room: 'A101'};
 
         it("Add Deal", function(done) {
-            chain.addDeal(deal1, function (error) {
+            chain.createSaflokKey(key1, function (error) {
                 expect(error).to.be.null;
-                chain.getDeals(function (error, deals) {
+                chain.getSaflokKeys(function (error, saflokKeys) {
                     expect(error).to.be.null;
-                    expect(deals.length).to.equal(1);
-                    expect(deals[0].id).to.equal(deal1.id);
-                    expect(deals[0].buyer).to.equal(deal1.buyer);
-                    expect(deals[0].seller).to.equal(deal1.seller);
-                    expect(deals[0].amount).to.equal(deal1.amount);
+                    expect(saflokKeys.length).to.equal(1);
+                    expect(saflokKeys[0].id).to.equal(key1.id);
+                    expect(saflokKeys[0].expiryDate).to.equal(key1.expiryDate);
+                    expect(saflokKeys[0].expiryTime).to.equal(key1.expiryTime);
+                    expect(saflokKeys[0].room).to.equal(key1.room);
                     done();
                 });
             });
         });
 
         after( function(done) {
-            //TODO remove deals created in tests. Use a fresh chain for now to test!
+            //TODO remove keys created in tests. Use a fresh chain for now to test!
             done();
         });
 
