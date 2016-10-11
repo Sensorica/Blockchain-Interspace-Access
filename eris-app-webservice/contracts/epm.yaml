@@ -1,0 +1,8 @@
+jobs:
+
+- name: SaflokManager
+  job:
+    deploy:
+      contract: SaflokManager.sol
+      instance: all
+      wait: true

@@ -1,0 +1,14 @@
+[2016-10-11 13:46:38.172] [DEBUG] eris.hello.chain - Created new saflok id: James, expiry date:121216, expiry time: 1300, room: A101
+[2016-10-11 13:46:38.918] [INFO] eris.hello.db - New saflok key detected (James:121216:1300:A101) with address: 2DB9AFAC92A7800EE2067EE7A62EBF567C6500D8
+[2016-10-11 13:46:38.929] [DEBUG] eris.hello.db - Performing DB insert for new saflok key with address 2DB9AFAC92A7800EE2067EE7A62EBF567C6500D8
+[2016-10-11 13:47:33.629] [INFO] eris.hello.chain - Found 9 saflok addresses.
+[2016-10-11 13:47:33.631] [DEBUG] eris.hello.chain - Retrieving saflok data for address: F91048F3EAEA85049A052DE5BF4FBE8940FF36C0
+[2016-10-11 13:47:33.635] [DEBUG] eris.hello.chain - Retrieving saflok data for address: AA5BB6FB907FA72034A3766B63FBA53011EA52D1
+[2016-10-11 13:47:33.638] [DEBUG] eris.hello.chain - Retrieving saflok data for address: 1FC0C5C3B07861139CA2E2C40AC6200B2FD88D68
+[2016-10-11 13:47:33.639] [DEBUG] eris.hello.chain - Retrieving saflok data for address: 955569A96FC2654195F2390B321A74CC8A04C38F
+[2016-10-11 13:47:33.644] [DEBUG] eris.hello.chain - Retrieving saflok data for address: 3577CED5D1EF9955A247C62B4DF33BFAF1D0B615
+[2016-10-11 13:47:33.648] [DEBUG] eris.hello.chain - Retrieving saflok data for address: 12C55FE004B78E6BA1A9DCD0801592EB193ACF61
+[2016-10-11 13:47:33.652] [DEBUG] eris.hello.chain - Retrieving saflok data for address: D2DAE37AAED6B6069ECDACF3B301A183857B4C87
+[2016-10-11 13:47:33.654] [DEBUG] eris.hello.chain - Retrieving saflok data for address: 0C2C87252B15892F153B3193D49D76F05CCF9C69
+[2016-10-11 13:47:33.658] [DEBUG] eris.hello.chain - Retrieving saflok data for address: 2DB9AFAC92A7800EE2067EE7A62EBF567C6500D8
+[2016-10-11 13:47:33.715] [INFO] eris.hello.db - Storing 9 saflok keys from chain in DB.
