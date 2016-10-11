@@ -87,7 +87,7 @@ var eris = require(__libs+'/eris-wrapper');
                 }
                 idx = result[1];
                 // keep reading ...
-                if(idx > 0) { collectKeyAddresses(); }
+                if(idx > 0) { collectSaflokAddresses(); }
                 // ... or hand over to start collecting data
                 else {
                     log.info('Found '+addresses.length+' saflok addresses.');

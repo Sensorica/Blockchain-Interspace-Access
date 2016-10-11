@@ -10,15 +10,13 @@ var PORT = 8264;
 var sendSaflokKey = function (callback, expiryDate, expiryTime, room) {
 var saflokMessage = message;
 
-saflokMessage.calculateLrc();
 saflokMessage.setExpiration(expiryDate,expiryTime);
-
+saflokMessage.setRoom(room);
+saflokMessage.calculateLrc();
 
 var messageBuffer = new Buffer(saflokMessage.buildRequestMsg(), 'hex');
 console.log(messageBuffer.toString('ascii'));
 console.log(messageBuffer.toString('hex'));
-
-
 
 var client = new net.Socket();
 client.connect(PORT, HOST, function() {

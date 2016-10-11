@@ -1,10 +1,5 @@
-[2016-10-04 13:13:37.045] [DEBUG] eris.hello.chain - Created new saflok id: 1, expiry date:100516, expiry time: 1300, room: A101
-[2016-10-04 13:13:37.831] [INFO] eris.hello.db - New saflok key detected (1:100516:1300:A101) with address: 08C83E4FE380B39DB11B7EB23319DD3F82542389
-[2016-10-04 13:13:37.831] [INFO] eris.hello.db - Calling Saflok Interface
-[2016-10-04 13:13:37.832] [INFO] eris.hello.db - Sent command to Saflok interface
-[2016-10-04 13:13:37.842] [DEBUG] eris.hello.db - Performing DB insert for new saflok key with address 08C83E4FE380B39DB11B7EB23319DD3F82542389
-[2016-10-04 13:35:42.428] [DEBUG] eris.hello.chain - Created new saflok id: 1, expiry date:100516, expiry time: 1300, room: A101
-[2016-10-04 13:35:42.809] [INFO] eris.hello.db - New saflok key detected (1:100516:1300:A101) with address: 391ED5BE867F262821A414A4A9D6B64B5A5EF3B7
-[2016-10-04 13:35:42.809] [INFO] eris.hello.db - Calling Saflok Interface
-[2016-10-04 13:35:42.810] [INFO] eris.hello.db - Sent command to Saflok interface
-[2016-10-04 13:35:42.819] [DEBUG] eris.hello.db - Performing DB insert for new saflok key with address 391ED5BE867F262821A414A4A9D6B64B5A5EF3B7
+[2016-10-11 12:55:19.616] [DEBUG] eris.hello.chain - Created new saflok id: Fred, expiry date:121216, expiry time: 1300, room: A100
+[2016-10-11 12:55:20.455] [INFO] eris.hello.db - New saflok key detected (Fred:121216:1300:A100) with address: 12C55FE004B78E6BA1A9DCD0801592EB193ACF61
+[2016-10-11 12:55:20.455] [INFO] eris.hello.db - Calling Saflok Interface
+[2016-10-11 12:55:20.457] [INFO] eris.hello.db - Sent command to Saflok interface
+[2016-10-11 12:55:20.467] [DEBUG] eris.hello.db - Performing DB insert for new saflok key with address 12C55FE004B78E6BA1A9DCD0801592EB193ACF61

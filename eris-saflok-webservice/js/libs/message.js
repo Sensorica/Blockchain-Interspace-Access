@@ -8,11 +8,14 @@ var global
     pmsTerm: "303031",
     txID: "303031",
     saflokPass: "32353020202020",
-    keyNumber: "4131303120",
     keyLevel: "31",
     encoderStation: "3031",
     encoderLED: "4646",
     numberOfKeys: "3031",
+    setRoom: function (room) {
+        this.keyNumber = room + "20";
+        return 0;
+    },
     setExpiration: function(expiryDate, expiryTime) {
         this.checkoutDate = expiryDate;
         this.checkoutTime = expiryTime;
