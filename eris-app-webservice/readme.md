@@ -1,5 +1,5 @@
 # Eris Saflok webservice
-Forked from (Eris-Ltd Hello-Eris)[https://github.com/eris-ltd/hello-eris/tree/master/apps/hello-eris]
+Forked from [Eris-Ltd Hello-Eris](https://github.com/eris-ltd/hello-eris/tree/master/apps/hello-eris)
 Thank you marmots!
 
 ## Setup
